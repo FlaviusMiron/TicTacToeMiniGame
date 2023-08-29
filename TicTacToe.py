@@ -1,3 +1,9 @@
+"""
+Tic tac toe using python's tkinter (not the best approach by any means, I did it this way mostly as a 1-2 day short code challange).
+The user will play with "X", while the computer will play with "0".
+Still need to implement a hard difficulty.
+"""
+
 import tkinter as tk
 from PIL import Image, ImageTk
 from abc import ABC, abstractmethod
@@ -16,17 +22,18 @@ class Tic_Tac_Toe_Game:
         self.__root.title("Tic and toe")
 
         self.__widgets_grid = {}
-        self.__free = list(range(1,10))
+        self.__free = list(range(1,10)) # The places on the grid where a move can be done
         self.computer_starts = computer_starts
         self.difficulty = difficulty
 
         for row in range(3):
             for column in range(3):
-                grid_element = empty(self.__root, (row,column))
+                grid_element = empty(self.__root, (row,column)) # Assign empty objects to the grid
                 grid_element.label.bind("<Button-1>",self.__player_input)
                 self.__widgets_grid[(row,column)] = grid_element
 
-        self.__first_value = self.__get_first_label_number()
+        self.__first_value = self.__get_first_label_number() # Will be used to keep track of the labels created by tkinter each time, so multiple plays are allowed.
+        # It is a result of a tkinter restriction in designing games
         if self.computer_starts:
             self.__computer_move(self.difficulty)
 
@@ -68,6 +75,10 @@ class Tic_Tac_Toe_Game:
             self.__decide_outcome(winner)
 
     def __get_good_move(self):
+        """
+        Returns a good move by the computer, but not the best. Checks if the computer would win by making a specific move and makes it if so.
+        Then checks if the player would win by making a specific move and blocks that move instead. Called if the difficulty is "medium"
+        """
         test_grid = {}
         for i in range(3):
             for j in range(3):
@@ -122,6 +133,10 @@ class Tic_Tac_Toe_Game:
             return 1
 
     def __evaluate_grid(self, grid = None):
+        """
+        Evaluates grid to check if either the player or the computer has won. If called without the argument "grid" it will evaluate the playing grid, and update it marking
+        who has won. It can also be called with anothe grid, in which it will evaluate that board. Usefull when making better moves by the computer, to not mess up the default grid.
+        """
         x_wins = 0
         o_wins = 0
 
@@ -235,7 +250,7 @@ class Tic_Tac_Toe_Game:
                 self.__widgets_grid[(row,column)] = empty(self.__root, (row,column))
                 self.__widgets_grid[(row,column)].label.bind("<Button-1>",self.__player_input)
 
-        self.__first_value = self.__get_first_label_number()
+        self.__first_value = self.__get_first_label_number() # Gets a new value for the first element, as tkinter has assign it another one on each change
 
         if self.computer_starts:
             self.__computer_move()
@@ -253,6 +268,9 @@ class Tic_Tac_Toe_Game:
     
     @staticmethod
     def get_digits_from(sequence):
+    """
+    Method used to get the numbers from a sequence, for example, a label's name. Probably could have been avoided given more time.
+    """
         last = [letter for letter in str(sequence) if letter.isdigit()]
         if len(last) == 0:
             last = "1"
@@ -266,6 +284,7 @@ class Tic_Tac_Toe_Game:
 
         
 class grid_object():
+    """Default parent class for any item that will be places somewhere on the grid"""
 
     current_path = os.path.dirname(__file__)
     specific_path = None
@@ -291,7 +310,7 @@ class grid_object():
         image_path = grid_object.current_path + cls.specific_path
         return image_path
 
-class x(grid_object):
+class x(grid_object): # Override the specific_path class attribute in the children of the parent class
     specific_path = "\\images\\x.png"
 
 class o(grid_object):
