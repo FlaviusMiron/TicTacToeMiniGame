@@ -1,5 +1,5 @@
 """
-Tic tac toe using python's tkinter (not the best approach by any means, I did it this way mostly as a 1-2 day short code challange).
+Tic tac toe using python's tkinter (not the best approach by any means, I did it this way mostly as a 1 day, short code challange).
 The user will play with "X", while the computer will play with "0".
 Still need to implement a hard difficulty.
 """
