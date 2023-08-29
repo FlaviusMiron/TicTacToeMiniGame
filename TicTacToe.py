@@ -268,9 +268,7 @@ class Tic_Tac_Toe_Game:
     
     @staticmethod
     def get_digits_from(sequence):
-    """
-    Method used to get the numbers from a sequence, for example, a label's name. Probably could have been avoided given more time.
-    """
+    """Method used to get the numbers from a sequence, for example, a label's name. Probably could have been avoided given more time."""
         last = [letter for letter in str(sequence) if letter.isdigit()]
         if len(last) == 0:
             last = "1"
@@ -284,10 +282,10 @@ class Tic_Tac_Toe_Game:
 
         
 class grid_object():
-    """Default parent class for any item that will be places somewhere on the grid"""
+    """Default parent class for any item that will be placed somewhere on the grid"""
 
-    current_path = os.path.dirname(__file__)
-    specific_path = None
+    current_path = os.path.dirname(__file__) 
+    specific_path = None # Will be overriden by the children classes
 
     def __init__(self, root, position):
         self.image_path = None
