@@ -134,8 +134,8 @@ class Tic_Tac_Toe_Game:
 
     def __evaluate_grid(self, grid = None):
         """
-        Evaluates grid to check if either the player or the computer has won. If called without the argument "grid" it will evaluate the playing grid, and update it marking
-        who has won. It can also be called with anothe grid, in which it will evaluate that board. Usefull when making better moves by the computer, to not mess up the default grid.
+        Evaluates "grid" to check if either the player or the computer has won. If called without the argument "grid" it will evaluate the playing grid, and update it marking
+        who has won. It can also be called with another grid, in which it will evaluate that board. Usefull when making better moves by the computer, to not mess up the default grid.
         """
         x_wins = 0
         o_wins = 0
@@ -285,7 +285,7 @@ class grid_object():
     """Default parent class for any item that will be placed somewhere on the grid"""
 
     current_path = os.path.dirname(__file__) 
-    specific_path = None # Will be overriden by the children classes
+    specific_path = None # Will be over-written by the children classes
 
     def __init__(self, root, position):
         self.image_path = None
@@ -308,7 +308,7 @@ class grid_object():
         image_path = grid_object.current_path + cls.specific_path
         return image_path
 
-class x(grid_object): # Override the specific_path class attribute in the children of the parent class
+class x(grid_object): # Over-write the specific_path class attribute in the children of the parent class
     specific_path = "\\images\\x.png"
 
 class o(grid_object):
